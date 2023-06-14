@@ -22,8 +22,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 			<Provider store={store}>
 				<Router>
 					<Routes>
-						<Route path="/game" element={<GameGuard />}>
-							<Route element={<Game />} />
+						<Route path="/" element={<GameGuard />}>
+							<Route path="/game" element={<Game />} />
 						</Route>
 						<Route path="/" element={<AuthGuard />}>
 							<Route path="/sign-up" element={<SignUpPage />} />
