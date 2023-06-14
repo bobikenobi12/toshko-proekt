@@ -99,7 +99,7 @@ export default function SignupCard() {
 				duration: 9000,
 				isClosable: true,
 			});
-			navigate("/sign-in");
+			navigate("/game");
 		} catch (error) {
 			if (error instanceof ZodError) {
 				console.log(error);

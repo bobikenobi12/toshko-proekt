@@ -24,12 +24,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 					<Routes>
 						<Route path="/" element={<GameGuard />}>
 							<Route path="/game" element={<Game />} />
+							<Route path="*" element={<h1>404</h1>} />
 						</Route>
 						<Route path="/" element={<AuthGuard />}>
 							<Route path="/sign-up" element={<SignUpPage />} />
 							<Route path="/sign-in" element={<SignInPage />} />
+							<Route path="*" element={<h1>404</h1>} />
 						</Route>
-						<Route path="*" element={<h1>404</h1>} />
 					</Routes>
 				</Router>
 			</Provider>

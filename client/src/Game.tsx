@@ -9,6 +9,8 @@ import {
 	useSubmitHighScoreMutation,
 } from "./features/game/gameApiSlice";
 
+import { useLogoutMutation } from "./features/auth/authApiSlice";
+
 const canvasX = 1000;
 const canvasY = 1000;
 const initialSnake = [
@@ -30,6 +32,7 @@ export default function Game() {
 
 	const { data: highScore } = useGetHighScoreQuery();
 	const [submitHighScore] = useSubmitHighScoreMutation();
+	const [logout] = useLogoutMutation();
 
 	useInterval(() => runGame(), delay);
 
@@ -136,6 +139,12 @@ export default function Game() {
 			<div className="scoreBox">
 				<h2>Score: {score}</h2>
 				<h2>High Score: {highScore?.highScore}</h2>
+				<button
+					onClick={() => logout()}
+					style={{ marginTop: "10px", color: "red" }}
+				>
+					Logout
+				</button>
 			</div>
 		</div>
 	);

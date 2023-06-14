@@ -77,7 +77,7 @@ export default function SignInPage() {
 				duration: 5000,
 				isClosable: true,
 			});
-			navigate("/");
+			navigate("/game");
 		} catch (err) {
 			if (err instanceof ZodError) {
 				toast({
