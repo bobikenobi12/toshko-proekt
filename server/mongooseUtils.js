@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     id: String,
     password: String,
     username: String,
+    highScore: Number
 });
 
 
@@ -36,6 +37,24 @@ const readUser = async (username) => {
     }
 };
 
+const updateUser = async (user) => {
+    try {
+        // Connect to the MongoDB database
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+        // Find the user based on the provided name
+        await UserModel.findOneAndUpdate({ username: user.username }, { highScore: user.highScore }, { new: true });
+        return true;
+    } catch (error) {
+        console.error('Error updating user:', error);
+        return false;
+    } finally {
+        // Disconnect from the MongoDB database
+        mongoose.disconnect();
+    }
+};
+
+
 const createUser = async (username, password) => {
     try {
         // Connect to the MongoDB database
@@ -45,7 +64,8 @@ const createUser = async (username, password) => {
 
         const user = new UserModel({
             username,
-            password: encryptedPassword
+            password: encryptedPassword,
+            highScore: 0,
         });
 
         await user.save();
@@ -60,4 +80,4 @@ const createUser = async (username, password) => {
     }
 };
 
-module.exports = { readUser, createUser };
+module.exports = { readUser, createUser, updateUser };

@@ -10,12 +10,13 @@ function authenticateToken(req, res, next) {
     const token = authHeader && authHeader.split(' ')[1];
 
     if (token == null) {
-        return res.sendStatus(401);
+        return res.status(401).json({ message: 'No access token' });
     }
+
 
     jwt.verify(token, secretKey, (err, user) => {
         if (err) {
-            return res.sendStatus(403);
+            return res.status(403).json({ message: 'Invalid access token' });
         }
         req.user = user;
         next();
@@ -27,7 +28,10 @@ function generateAccessToken(refreshToken) {
         return null;
     }
 
-    return jwt.sign(refreshTokensToUsername[refreshToken], secretKey, { expiresIn: '1m' });
+    const username = refreshTokensToUsername[refreshToken];
+
+    const accessToken = jwt.sign(username, secretKey, { expiresIn: '1m' });
+    return accessToken;
 }
 
 function generateRefreshToken(username) {
@@ -43,9 +47,15 @@ function removeRefreshToken(token) {
     return true;
 }
 
+function getUsernameFromAccessToken(accessToken) {
+    const token = accessToken.split(' ')[1];
+    return jwt.verify(token, secretKey).username;
+}
+
 module.exports = {
     authenticateToken,
     generateAccessToken,
     generateRefreshToken,
-    removeRefreshToken
+    removeRefreshToken,
+    getUsernameFromAccessToken
 };
