@@ -13,6 +13,8 @@ import {
 
 import { useLogoutMutation } from "./features/auth/authApiSlice";
 
+import ThemeToggle from "./ThemeToggle";
+
 const canvasX = 1000;
 const canvasY = 1000;
 const initialSnake = [
@@ -139,6 +141,7 @@ export default function Game() {
 				Play
 			</button>
 			<div className="scoreBox">
+				<ThemeToggle />
 				<Heading size="md" color={useColorModeValue("black", "white")}>
 					Score: {score}
 				</Heading>
