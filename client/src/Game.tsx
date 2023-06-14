@@ -34,7 +34,8 @@ export default function Game() {
 	const [gameOver, setGameOver] = useState(false);
 	const [score, setScore] = useState(0);
 
-	const [getHighScore, { data: highScore }] = useLazyGetHighScoreQuery();
+	const [getHighScore, { data: highScore, isLoading }] =
+		useLazyGetHighScoreQuery();
 	const [submitScore] = useSubmitScoreMutation();
 	const [logout] = useLogoutMutation();
 
@@ -147,7 +148,7 @@ export default function Game() {
 					Score: {score}
 				</Heading>
 				<Heading size="md" color={useColorModeValue("black", "white")}>
-					High Score: {highScore?.highScore}
+					High Score: {highScore ? highScore.highScore : 0}
 				</Heading>
 				<Button
 					colorScheme="red"
