@@ -11,11 +11,12 @@ import {
 	Stack,
 	useToast,
 	Icon,
+	Link,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 import { InfoIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
@@ -149,6 +150,16 @@ export default function SignInPage() {
 								{errors.password?.message as string}
 							</FormErrorMessage>
 						</FormControl>
+						<Stack spacing={6}>
+							<Link
+								as={RouterLink}
+								to="/sign-up"
+								fontSize="md"
+								color={"blue.500"}
+							>
+								Регистрация
+							</Link>
+						</Stack>
 						<Button
 							mt={4}
 							type="submit"
