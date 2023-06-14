@@ -101,7 +101,6 @@ export default function Game() {
 		if (checkCollision(newSnakeHead)) {
 			setDelay(null);
 			submitScore({ score: score });
-			getHighScore();
 			setGameOver(true);
 			handleSetScore();
 		}
