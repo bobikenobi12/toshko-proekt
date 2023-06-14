@@ -34,8 +34,7 @@ export default function Game() {
 	const [gameOver, setGameOver] = useState(false);
 	const [score, setScore] = useState(0);
 
-	const [getHighScore, { data: highScore, isLoading }] =
-		useLazyGetHighScoreQuery();
+	const [getHighScore, { data: highScore }] = useLazyGetHighScoreQuery();
 	const [submitScore] = useSubmitScoreMutation();
 	const [logout] = useLogoutMutation();
 
