@@ -4,7 +4,7 @@ import { authApi } from "../../features/auth/authApiSlice";
 import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
-	baseUrl: import.meta.env.VITE_API_URL as string,
+	baseUrl: "http://localhost:3000",
 	prepareHeaders: (headers, { getState }) => {
 		const token = selectToken(getState() as RootState);
 		if (token) {

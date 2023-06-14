@@ -21,6 +21,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 				<Router>
 					<Routes>
 						<Route element={<App />} />
+						<Route path="/sign-up" element={<SignUpPage />} />
+						<Route path="/sign-in" element={<SignInPage />} />
 						<Route path="*" element={<h1>404</h1>} />
 					</Routes>
 				</Router>
