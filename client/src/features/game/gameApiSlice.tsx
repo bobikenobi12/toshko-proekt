@@ -27,4 +27,4 @@ export const authApi = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useGetHighScoreQuery, useSubmitScoreMutation } = authApi;
+export const { useLazyGetHighScoreQuery, useSubmitScoreMutation } = authApi;

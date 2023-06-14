@@ -7,7 +7,7 @@ import useInterval from "./hooks/useInterval";
 import { Button, Heading, useColorModeValue } from "@chakra-ui/react";
 
 import {
-	useGetHighScoreQuery,
+	useLazyGetHighScoreQuery,
 	useSubmitScoreMutation,
 } from "./features/game/gameApiSlice";
 
@@ -34,7 +34,7 @@ export default function Game() {
 	const [gameOver, setGameOver] = useState(false);
 	const [score, setScore] = useState(0);
 
-	const { data: highScore } = useGetHighScoreQuery();
+	const [getHighScore, { data: highScore }] = useLazyGetHighScoreQuery();
 	const [submitScore] = useSubmitScoreMutation();
 	const [logout] = useLogoutMutation();
 
@@ -101,6 +101,7 @@ export default function Game() {
 		if (checkCollision(newSnakeHead)) {
 			setDelay(null);
 			submitScore({ score: score });
+			getHighScore();
 			setGameOver(true);
 			handleSetScore();
 		}
