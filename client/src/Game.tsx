@@ -4,8 +4,6 @@ import AppleLogo from "./assets/applePixels.png";
 import Monitor from "./assets/oldMonitor.png";
 import useInterval from "./hooks/useInterval";
 
-import { Image, Heading, Button, VStack } from "@chakra-ui/react";
-
 import {
 	useGetHighScoreQuery,
 	useSubmitHighScoreMutation,
@@ -123,8 +121,8 @@ export default function Game() {
 
 	return (
 		<div onKeyDown={(e) => changeDirection(e)}>
-			<Image id="fruit" src={AppleLogo} alt="fruit" width="30" />
-			<Image src={Monitor} alt="fruit" width="4000" className="monitor" />
+			<img id="fruit" src={AppleLogo} alt="fruit" width="30" />
+			<img src={Monitor} alt="fruit" width="4000" className="monitor" />
 			<canvas
 				className="playArea"
 				ref={canvasRef}
@@ -132,11 +130,13 @@ export default function Game() {
 				height={`${canvasY}px`}
 			/>
 			{gameOver && <div className="gameOver">Game Over</div>}
-			<Button onClick={play}>Play</Button>
-			<VStack>
-				<Heading>Score: {score}</Heading>
-				<Heading>High Score: {highScore?.highScore}</Heading>
-			</VStack>
+			<button onClick={play} className="playButton">
+				Play
+			</button>
+			<div className="scoreBox">
+				<h2>Score: {score}</h2>
+				<h2>High Score: {highScore?.highScore}</h2>
+			</div>
 		</div>
 	);
 }
