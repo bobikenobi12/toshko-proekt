@@ -4,6 +4,8 @@ import AppleLogo from "./assets/applePixels.png";
 import Monitor from "./assets/oldMonitor.png";
 import useInterval from "./hooks/useInterval";
 
+import { Button, Heading } from "@chakra-ui/react";
+
 import {
 	useGetHighScoreQuery,
 	useSubmitHighScoreMutation,
@@ -137,14 +139,17 @@ export default function Game() {
 				Play
 			</button>
 			<div className="scoreBox">
-				<h2>Score: {score}</h2>
-				<h2>High Score: {highScore?.highScore}</h2>
-				<button
-					onClick={() => logout()}
-					style={{ marginTop: "10px", color: "red" }}
+				<Heading size="md">Score: {score}</Heading>
+				<Heading size="md">High Score: {highScore?.highScore}</Heading>
+				<Button
+					colorScheme="red"
+					variant="outline"
+					onClick={() => {
+						logout().unwrap();
+					}}
 				>
 					Logout
-				</button>
+				</Button>
 			</div>
 		</div>
 	);
