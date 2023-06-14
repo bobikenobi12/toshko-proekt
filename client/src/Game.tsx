@@ -8,7 +8,7 @@ import { Button, Heading } from "@chakra-ui/react";
 
 import {
 	useGetHighScoreQuery,
-	useSubmitHighScoreMutation,
+	useSubmitScoreMutation,
 } from "./features/game/gameApiSlice";
 
 import { useLogoutMutation } from "./features/auth/authApiSlice";
@@ -33,7 +33,7 @@ export default function Game() {
 	const [score, setScore] = useState(0);
 
 	const { data: highScore } = useGetHighScoreQuery();
-	const [submitHighScore] = useSubmitHighScoreMutation();
+	const [submitScore] = useSubmitScoreMutation();
 	const [logout] = useLogoutMutation();
 
 	useInterval(() => runGame(), delay);
@@ -98,7 +98,7 @@ export default function Game() {
 		newSnake.unshift(newSnakeHead);
 		if (checkCollision(newSnakeHead)) {
 			setDelay(null);
-			submitHighScore({ highScore: score });
+			submitScore({ score: score });
 			setGameOver(true);
 			handleSetScore();
 		}

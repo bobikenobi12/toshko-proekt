@@ -4,8 +4,8 @@ export interface HighScore {
 	highScore: number;
 }
 
-export interface SubmitHighScoreRequest {
-	highScore: number;
+export interface SubmitScoreRequest {
+	score: number;
 }
 
 export const authApi = apiSlice.injectEndpoints({
@@ -17,7 +17,7 @@ export const authApi = apiSlice.injectEndpoints({
 				body,
 			}),
 		}),
-		submitHighScore: builder.mutation<HighScore, SubmitHighScoreRequest>({
+		submitScore: builder.mutation<HighScore, SubmitScoreRequest>({
 			query: (body) => ({
 				url: `/submitScore`,
 				method: "POST",
@@ -27,4 +27,4 @@ export const authApi = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useGetHighScoreQuery, useSubmitHighScoreMutation } = authApi;
+export const { useGetHighScoreQuery, useSubmitScoreMutation } = authApi;
