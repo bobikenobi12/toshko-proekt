@@ -4,6 +4,11 @@ import AppleLogo from "./assets/applePixels.png";
 import Monitor from "./assets/oldMonitor.png";
 import useInterval from "./hooks/useInterval";
 
+import {
+	useGetHighScoreQuery,
+	useSubmitHighScoreMutation,
+} from "./features/game/gameApiSlice";
+
 const canvasX = 1000;
 const canvasY = 1000;
 const initialSnake = [
@@ -22,6 +27,9 @@ export default function Game() {
 	const [delay, setDelay] = useState<number | null>(null);
 	const [gameOver, setGameOver] = useState(false);
 	const [score, setScore] = useState(0);
+
+	const { data: highScore } = useGetHighScoreQuery();
+	const [submitHighScore] = useSubmitHighScoreMutation();
 
 	useInterval(() => runGame(), delay);
 
@@ -85,6 +93,7 @@ export default function Game() {
 		newSnake.unshift(newSnakeHead);
 		if (checkCollision(newSnakeHead)) {
 			setDelay(null);
+			submitHighScore({ highScore: score });
 			setGameOver(true);
 			handleSetScore();
 		}
@@ -126,7 +135,7 @@ export default function Game() {
 			</button>
 			<div className="scoreBox">
 				<h2>Score: {score}</h2>
-				<h2>High Score: {localStorage.getItem("snakeScore")}</h2>
+				<h2>High Score: {highScore?.highScore}</h2>
 			</div>
 		</div>
 	);
