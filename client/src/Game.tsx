@@ -4,7 +4,7 @@ import AppleLogo from "./assets/applePixels.png";
 import Monitor from "./assets/oldMonitor.png";
 import useInterval from "./hooks/useInterval";
 
-import { Button, Heading } from "@chakra-ui/react";
+import { Button, Heading, useColorModeValue } from "@chakra-ui/react";
 
 import {
 	useGetHighScoreQuery,
@@ -139,8 +139,12 @@ export default function Game() {
 				Play
 			</button>
 			<div className="scoreBox">
-				<Heading size="md">Score: {score}</Heading>
-				<Heading size="md">High Score: {highScore?.highScore}</Heading>
+				<Heading size="md" color={useColorModeValue("black", "white")}>
+					Score: {score}
+				</Heading>
+				<Heading size="md" color={useColorModeValue("black", "white")}>
+					High Score: {highScore?.highScore}
+				</Heading>
 				<Button
 					colorScheme="red"
 					variant="outline"
